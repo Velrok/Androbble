@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="E:/android-sdk-windows-1.5_r3/platforms/android-1.5/android.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/E:/android-sdk-windows-1.5_r3/docs/reference/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

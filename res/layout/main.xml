@@ -4,9 +4,21 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        
+        	<Button android:id="@+id/list_methods_button" 
+        	    android:text="list methods"
+        	    android:layout_width="wrap_content"
+        	    android:layout_height="wrap_content"/>
+        
+    </LinearLayout>
+    
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello" />
-
+        android:text="@string/hello"
+    	android:id="@+id/console"/>
 </LinearLayout>
