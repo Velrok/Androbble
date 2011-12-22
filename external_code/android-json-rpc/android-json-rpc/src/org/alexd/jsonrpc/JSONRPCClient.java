@@ -138,6 +138,25 @@ public abstract class JSONRPCClient {
 	/**
 	 * Perform a remote JSON-RPC method call
 	 * @param method The name of the method to invoke
+	 * @param request the request as JSONObject, if you need a fine grained request
+	 * @return The result of the RPC
+	 * @throws JSONRPCException if an error is encountered during JSON-RPC method call
+	 */
+	public Object call(String method, JSONObject request) throws JSONRPCException
+	{
+		try 
+		{
+			return doJSONRequest(request).get("result");
+		} 
+		catch (JSONException e)
+		{
+			throw new JSONRPCException("Cannot convert result", e);
+		}
+	}
+	
+	/**
+	 * Perform a remote JSON-RPC method call
+	 * @param method The name of the method to invoke
 	 * @param params Arguments of the method
 	 * @return The result of the RPC as a String
 	 * @throws JSONRPCException if an error is encountered during JSON-RPC method call
