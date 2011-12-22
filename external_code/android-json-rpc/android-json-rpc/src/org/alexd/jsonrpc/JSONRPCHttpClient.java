@@ -71,6 +71,7 @@ public class JSONRPCHttpClient extends JSONRPCClient
 		}
 		request.setEntity(entity);
 
+		String responseString = "";
 		try
 		{
 			// Execute the request and try to decode the JSON Response
@@ -78,7 +79,7 @@ public class JSONRPCHttpClient extends JSONRPCClient
 			HttpResponse response = httpClient.execute(request);
 			t = System.currentTimeMillis() - t;
 			Log.d("json-rpc", "Request time :" + t);
-			String responseString = EntityUtils.toString(response.getEntity());
+			responseString = EntityUtils.toString(response.getEntity());
 			responseString = responseString.trim();
 			JSONObject jsonResponse = new JSONObject(responseString);
 			// Check for remote errors
@@ -105,6 +106,7 @@ public class JSONRPCHttpClient extends JSONRPCClient
 		}
 		catch (JSONException e)
 		{
+			Log.e("json-rpc", "Invalid JSON response:\n" + responseString);
 			throw new JSONRPCException("Invalid JSON response", e);
 		}
 	}
