@@ -19,16 +19,8 @@ public abstract class JSONRPCClient {
 	
 	protected abstract JSONObject doJSONRequest(JSONObject request) throws JSONRPCException;
 	
-	protected JSONObject doRequest(String method, Object[] params) throws JSONRPCException
-	{
-		//Copy method arguments in a json array
-		JSONArray jsonParams = new JSONArray();
-		for (int i=0; i<params.length; i++)
-		{
-			jsonParams.put(params[i]);
-		}
-		
-		//Create the json request object
+    protected JSONObject doRequest(String method, JSONobject jsonParams) throws JSONRPCException {
+        //Create the json request object
 		JSONObject jsonRequest = new JSONObject();
 		try 
 		{
@@ -42,6 +34,18 @@ public abstract class JSONRPCClient {
 			throw new JSONRPCException("Invalid JSON request", e1);
 		}
 		return doJSONRequest(jsonRequest);
+        
+    }
+    
+	protected JSONObject doRequest(String method, Object[] params) throws JSONRPCException
+	{
+		//Copy method arguments in a json array
+		JSONArray jsonParams = new JSONArray();
+		for (int i=0; i<params.length; i++)
+		{
+			jsonParams.put(params[i]);
+		}
+        return doRequest(method, params);
 	}
 	
 	protected int soTimeout = 0, connectionTimeout = 0;
