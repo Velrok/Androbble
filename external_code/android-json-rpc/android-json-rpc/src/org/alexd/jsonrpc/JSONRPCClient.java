@@ -45,7 +45,21 @@ public abstract class JSONRPCClient {
 		{
 			jsonParams.put(params[i]);
 		}
-        return doRequest(method, params);
+
+        //Create the json request object
+		JSONObject jsonRequest = new JSONObject();
+		try 
+		{
+			//id hard-coded at 1 for now
+			jsonRequest.put("id", 1);
+			jsonRequest.put("method", method);
+			jsonRequest.put("params", jsonParams);
+		}
+		catch (JSONException e1)
+		{
+			throw new JSONRPCException("Invalid JSON request", e1);
+		}
+		return doJSONRequest(jsonRequest);
 	}
 	
 	protected int soTimeout = 0, connectionTimeout = 0;
@@ -146,9 +160,7 @@ public abstract class JSONRPCClient {
 	{
 		try 
 		{
-			request.put("id", 1);
-			request.put("method", method);
-			return doJSONRequest(request).get("result");
+			return doRequest(request).get("result");
 		} 
 		catch (JSONException e)
 		{
