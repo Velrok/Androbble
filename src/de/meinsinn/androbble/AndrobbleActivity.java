@@ -3,7 +3,10 @@ package de.meinsinn.androbble;
 import org.alexd.jsonrpc.JSONRPCClient;
 import org.alexd.jsonrpc.JSONRPCException;
 
+import de.meinsinn.androbble.wobble.WobbleRPC;
+
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +19,9 @@ public class AndrobbleActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
+        Intent intent = new Intent(this, WelcomeActivity.class);
+        startActivity(intent);
+        
         Button listMethodsButton = (Button) findViewById(R.id.list_methods_button);
 
         listMethodsButton.setOnClickListener(new View.OnClickListener() {
@@ -25,8 +31,8 @@ public class AndrobbleActivity extends Activity {
 				String result = "no result";
 		        
 		        try {
-		        	JSONRPCClient client = JSONRPCClient.create("http://192.168.1.146:8888/api/endpoint.php");
-		        	result = client.callString("system.listMethods");
+		        	JSONRPCClient rpc = WobbleRPC.getInstance();
+		        	result = rpc.callString("system.listMethods");
 				} catch (JSONRPCException e) {
 					e.printStackTrace();
 				}
