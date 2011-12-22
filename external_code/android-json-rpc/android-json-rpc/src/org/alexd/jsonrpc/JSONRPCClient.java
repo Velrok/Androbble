@@ -146,6 +146,8 @@ public abstract class JSONRPCClient {
 	{
 		try 
 		{
+			request.put("id", 1);
+			request.put("method", method);
 			return doJSONRequest(request).get("result");
 		} 
 		catch (JSONException e)
